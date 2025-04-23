@@ -59,7 +59,7 @@ ROOT_URLCONF = 'demo_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],  # ✅ 这一行要有！
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

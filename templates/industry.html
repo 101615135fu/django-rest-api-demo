@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>创业生态图 - 行业概览</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #2c3e50;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #34495e;
+    }
+
+    select {
+      padding: 8px 12px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .section {
+      margin-top: 25px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eee;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 创业生态图 - 行业概览</h1>
+
+  <label for="industry">请选择行业：</label>
+  <select id="industry">
+    <option value="Fintech">Fintech</option>
+    <option value="Healthtech">HealthTech</option>
+    <option value="Edtech">EdTech</option>
+    <option value="E-commerce">E-commerce</option>
+    <option value="Greentech">GreenTech</option>
+  </select>
+
+  <div class="section">
+    <h2>🌐 市场规模</h2>
+    <p id="market-size" class="tag">加载中...</p>
+  </div>
+
+  <div class="section">
+    <h2>🏢 顶级公司</h2>
+    <ul id="top-companies"></ul>
+  </div>
+
+  <div class="section">
+    <h2>📈 成长最快的创业公司</h2>
+    <ul id="fastest-growing"></ul>
+  </div>
+
+  <script>
+    const market = document.getElementById('market-size');
+    const topList = document.getElementById('top-companies');
+    const fastList = document.getElementById('fastest-growing');
+    const dropdown = document.getElementById('industry');
+
+    function loadIndustryData(industry) {
+      market.textContent = "加载中...";
+      topList.innerHTML = "";
+      fastList.innerHTML = "";
+
+      fetch(`/api/industry_summary_api/${industry}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            market.textContent = "行业信息未找到";
+            return;
+          }
+          market.textContent = data.market_size;
+
+          data.top_companies.forEach((c, index) => {
+            const li = document.createElement('li');
+            li.textContent = `${index + 1}. ${c.name} — 营业额：${c.revenue}`;
+            topList.appendChild(li);
+          });
+
+          data.fastest_growing.forEach(s => {
+            const li = document.createElement('li');
+            li.textContent = `🚀 ${s.name}（创办：${s.founded}）`;
+            fastList.appendChild(li);
+          });
+        });
+    }
+
+    // 默认加载 Fintech
+    loadIndustryData("Fintech");
+
+    // 切换下拉框时加载新数据
+    dropdown.addEventListener('change', (e) => {
+      loadIndustryData(e.target.value);
+    });
+  </script>
+
+</body>
+</html>

@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),
+    path('api/', include('api.urls')), # ⬅️ 这句必须有，告诉 Django 加载 api.urls 的路由
+    path('', lambda request: render(request, 'industry.html')),  # 可选默认首页    
 ]
 
