@@ -1,24 +1,31 @@
+# Django>=4.2
+# djangorestframework>=3.15
+# djongo
+# django-cors-headers
+# pymongo
+# pandas
+# numpy==1.24.4
+# akshare==1.16.72
+# # tensorflow-macos==2.13.0
+# torch==2.2.2
+# torchvision==0.17.2
+# torchtext==0.17.2
+# streamlit
+# scikit-learn
+# matplotlib
+# jinja2
+# openpyxl
+# requests
+# aiohttp
+# nest-asyncio>=1.6
+# yarl>=1.7,<2.0
+# flatbuffers>=24.3
+# h5py>=3.11
+# pyarrow
+
 Django>=4.2
 djangorestframework>=3.15
-djongo
 django-cors-headers
-pymongo
-pandas
-numpy==1.24.4
-akshare==1.16.72
-tensorflow-macos==2.13.0
-torch==2.2.2
-torchvision==0.17.2
-torchtext==0.17.2
-streamlit
-scikit-learn
-matplotlib
-jinja2
-openpyxl
 requests
-aiohttp
-nest-asyncio>=1.6
-yarl>=1.7,<2.0
-flatbuffers>=24.3
-h5py>=3.11
-pyarrow
+backports-zoneinfo ; python_version < "3.9"
+
