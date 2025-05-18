@@ -10,8 +10,12 @@ A lightweight backend project providing RESTful APIs built with **Django** and *
 ---
 
 ## 📂 Project Structure
-<pre> ```bash 📁 Project Structure ├── api/ # API logic ├── demo_project/ # Django project settings ├── templates/ # HTML templates (e.g. industry summary) ├── Dockerfile # Docker build config ├── docker-compose.yml # Docker service definition └── requirements.txt # Dependencies ``` </pre>
-
+├── api/ # API logic
+├── demo_project/ # Django project settings 
+├── templates/ # HTML templates (e.g. industry summary) 
+├── Dockerfile # Docker build config 
+├── docker-compose.yml # Docker service definition 
+└── requirements.txt # Dependencies 
 ---
 
 ## 🚀 Quick Start
