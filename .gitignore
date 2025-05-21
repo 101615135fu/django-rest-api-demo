@@ -1,0 +1,34 @@
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 其他常见Python项目忽略文件
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django相关
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# 虚拟环境
+venv/
+ENV/
