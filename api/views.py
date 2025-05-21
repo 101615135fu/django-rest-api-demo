@@ -14,18 +14,50 @@ def select_all(request):
 
 
 
+# @api_view(['GET'])
+# def get_stock_quotes(request):
+#     url = "https://yahoo-finance15.p.rapidapi.com/api/v1/markets/stock/quotes"
+#     querystring = {"ticker":"AAPL,MSFT"}
+
+#     headers = {
+#         "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
+#         "x-rapidapi-key": "2dfa727615msh3c6f698544ce015p142450jsn646a1bc337ef"  # ⚠️ 替换为你自己的
+#     }
+
+#     response = requests.get(url, headers=headers, params=querystring)
+#     return Response(response.json())
 @api_view(['GET'])
 def get_stock_quotes(request):
     url = "https://yahoo-finance15.p.rapidapi.com/api/v1/markets/stock/quotes"
-    querystring = {"ticker":"AAPL,MSFT"}
+    querystring = {
+        "ticker": "AAPL,MSFT,GOOGL,AMZN,META,TSLA,NVDA,JPM,V,JNJ,WMT,PG,BABA,TSM,ORCL"
+    }
 
     headers = {
         "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
-        "x-rapidapi-key": "2dfa727615msh3c6f698544ce015p142450jsn646a1bc337ef"  # ⚠️ 替换为你自己的
+        "x-rapidapi-key": "2dfa727615msh3c6f698544ce015p142450jsn646a1bc337ef"  # ⚠️ 请替换为你自己的
     }
 
     response = requests.get(url, headers=headers, params=querystring)
-    return Response(response.json())
+    raw_data = response.json()
+
+    simplified = []
+    for stock in raw_data["body"]:
+        simplified.append({
+            "symbol": stock.get("symbol"),
+            "name": stock.get("longName") or stock.get("shortName"),
+            "price": stock.get("regularMarketPrice"),
+            "change_percent": stock.get("regularMarketChangePercent"),
+            "market_cap": stock.get("marketCap"),
+            "pe_ratio": stock.get("trailingPE"),
+            "volume": stock.get("regularMarketVolume"),
+            "currency": stock.get("currency"),
+        })
+
+    return Response({"data": simplified})
+
+
+
 
 @api_view(['GET'])
 def get_industry_summary(request, industry_name):
